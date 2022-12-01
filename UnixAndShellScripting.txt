@@ -1,0 +1,836 @@
+
+ls						------> to list all files in curr dir
+ls -ltr / ls -l -t -r 	------> to details view of all files
+
+External Commands -> executes by Kernel (cat)
+Internal Commands -> executes by shell (ls,type,pwd,eco,cd)
+
+pwd	------> to see curr directory
+
+bin	--> user binary
+sbin	--> system binary
+
+cd .. ---> to return back in directory
+
+cd /etc --->all the software will install at this location
+
+cal 		---> For calander
+cal 2022	---> to see year of calander
+
+date		---> to see curr date nd time
+date +%d 	---> display only date value
+date +%D 	---> display date in mm/dd/yyyy
+date +%F    ---> yyyy-mm-dd
+date +%H 	---> hour value
+date +%J	---> no. of pass day in year
+date +%m 	---> month
+date +%M 	---> minute
+date +%S	---> sec
+date +%N 	---> Nano Sec
+
+passwd 		---> to change the password
+
+who 		---> shows the all users
+who am i 	---> your login
+w 		---> gives complete details
+logname 	---> account / user which are currenty using
+
+last 		---> previous history of login logut reboot datails
+
+
+cal -1		---> 1 CURR MONTH Calander
+Cal -3		---> shown 3 month calander (prev , curr, next)
+cal -s 	---> **shows related arguments and commands
+cal -m 	---> **shows related arguments and commands
+cal -j 	---> shown 1 month calander in the from of no. of days 
+cal -y 	---> shown whole year calander
+
+date +%d	-> curr_date 13
+date +%D	-> mm/dd/yy
+date +%F	-> yyyy-mm-dd
+date +%H	-> hour 24-hour
+date +%I	-> Shows hour in 12-hour format [11]
+date +%j	Displays the day of the year [001 – 366]
+date +%m	month
+date +%M	min
+date +%S	sec
+date +%N	nano sec
+date +%Y	year
+date +%Z	zone
+
+tty		--->prints the file name of the terminal connected to standard input.
+stty		--->used to change and print terminal line settings
+
+man mkdir
+echo "Welcome to the session"			---> will show the welcome
+echo "Welcome to the session" > myfile.txt	---> will copy the text in myfile.txt if not exist it will create a file and copy the text
+cat myfile.txt 				---> will show the content of file
+
+
+*********In linux all are process/file.
+
+
+Prefix
+_	-> Regular file
+d	-> Directory file
+c	-> Charater file
+b	-> Block file
+n	-> Named Pipes or FIFO
+p	-> Link
+s	-> Socket
+
+
+if . prefix is the used to make file is hidden file.	TO SEE use --> ls -ltra
+
+df		-> displays the amount of disk space available on the filesystem with each file name's argument
+df -a		-> all info
+df -a /home	-> all info of home
+df -h		-> print size in powers of 1024
+df --help	-> to see the more about df
+
+du		-> disk uses
+du -h /home	-> print size in human readable forment
+du -g /home	-> n/a
+du -a /home	-> print all info
+du -k /home	->
+
+
+
+uname		-> unix system machine
+uname -a 	-> complete info
+uname -n	print the network node hostname
+uname -s	print the kernel name
+uname -m	print the machine hardware name
+uname -p	print the processor type (non-portable)
+uname -i	print the hardware platform (non-portable)
+
+
+cd ..	-> go to prev dir
+cd -	-> go to prev cmd dir
+cd / 	-> go to root dir
+cd ~	-> go to home dir  /
+
+mkdir -p file_name -------> will crete file if exits not will create
+
+man rmdir	--> it will show all detials about the rmdir cmd
+
+rmdir		--> will remove dir if it is empty
+rm -rf 	--> focefully delete
+
+ls
+ls -t	-> only file in reverse
+ls -r	-> in revesre wise show
+ls -R	-> tree wish
+ls -c 	-> col wise
+ls -a 	-> to see all file
+ls -i	-> 
+ls -v 	-> version wise
+ls -u	-> last excuted wise
+
+ls -ltra	-> see all info
+ls -slrta	-> sort size wise
+
+****************************************************************************************************************************************
+
+ls -t
+ls -r
+ls -R
+ls -c
+ls -x
+ls -X
+ls -a
+ls -v
+ls -i
+ls -u
+ls *
+ls -L
+ls -A
+ls -s
+ls -S
+ls -p
+ls -n
+ls -h
+ls -F
+ls -I
+
+touch x.txt
+touch y.so
+touch z.xl
+touch 04365465z.xl
+touch file{1,2,3,4,5}
+echo "This is file1" > file1
+echo "This is file2" > file2
+
+cat file1	//for displaying
+cat file2
+
+cat file1 file2 > file3	//for copy
+
+display:
+cat file2
+cat file3
+cat file1 file2
+
+cat file1>file2	//for copy
+cat file1 file2
+cat  > file1
+cat file1
+cat file1 >> file2	// for append
+cat file2
+
+display: split horigentally
+more file3		from start
+less file3		from end
+head test.txt		10 line from start
+head -n 3 test.txt	3 line from start
+tail text.txt		10 line from end
+tail -n 3 text.txt	3 line from end
+
+display Split vertically:
+cut -c 5-12 15-18 test.txt
+cut -d " " -f 1,4 file1.txt	// 1 and 4
+cut -d " " -f 1-4 file2.txt	// 1 to 4
+who | cut -d " " -f 1		
+who | cut -d " " -f 1,2
+ls -ltr | cut -c 3-12
+
+
+Paste :
+paste -d " " file1.txt file3.txt
+
+ls -ltr | tee file_ls.txt 	=> all the data will go at tee file i.e it will store the data 
+
+ls -ltra | head -n 2	==> it will show 2 line from start 
+
+
+delete:
+rm file1 file3
+
+
+
+WC -LC FILE3	ERROR
+LP -W
+LP -O NOBANNER
+LP -P LIST
+LP -D PRINTER
+LP -N NUM
+LP -Q LEVEL
+
+
+PIPING COMMANDS :
+WC -1 | LP	// WORD COUNT
+WHO | WC -1
+LS | WC -1 > LINECOUNT
+CAT FILE3 | MORE
+WC < FILE3
+CAL > FILE3
+CAT A.TXT | MORE | WC -L > BB
+CAT XYZ ABC > OUTFILE 2>&1
+CAT XYZ ABC > OUTFILE 2> ERRFILE
+WC TEST.TXT >> DEF
+
+
+vi text.txt ====> to create a file with text end quit from editor mode esc :qw!
+
+
+
+translating character :
+man tr   
+echo "linux        server" | tr -s " " ","	=> linux,server
+head file1.txt | tr '[a-z]' '[A-Z]'		=> will change the all later in upper case of file1 
+
+campare:
+cmp file1.txt file3.txt => it will display the line num and char num where the difference will found // only file
+
+difference :
+diff file1.txt file3.txt => it will show whole difference in files
+
+alias fr='cal' => it will display cal for cal and fr both
+unalias fr='cal' 	=> to remove the alias
+
+
+Search for file:
+find /home -name file1.txt	=> to find a file and their path
+find $HOME -iname file1.txt	=> it will search for all file with same name but diff case
+
+find / -type f -name ".txt" 	=> all file come with .txt extension
+
+search for dir:
+find /home -type d -name edureka
+
+cat - it is used to displaay the contents of one or multiple text files, combine files by appending one file’s contents to the end of another file, and create new files.
+	cat [OPTIONS] [FILE_NAMES]
+	cat file1 name > file2 name	-> to copy content of file 1 in file 2
+	cat file1 name >> file2 name	-> to append the content of file1 in the end of file2
+	cat -n file name		-> to display with numberwise
+	cat -t file name		-> to seprate with tab and spaces
+	
+
+
+File Security : control accress to files and directories. (bu ownership / permission)
+Types of Access :
+	1. User/owner Permission (u)
+	2. Group Permissions (g)
+	3. Othe/Public Permissions (o)
+	4. All (a)
+
+
+chmod +rwx	-> filename to add permissions
+chmod -rwx	-> directoryname to remove permissions
+chmod +x	-> filename to allow executable permission
+chmod -wx	-> to remove write and executable permission
+
+
+
+	default octal value (4+2+1=7) highest level of permission
+R(0-7)	->4 
+W(0-7)	->2
+X(0-7)	->1
+
+0 --- (Noting is there from w r x)
+1 --X
+2 -w-
+3 -wx
+4 r--
+5 r-x
+6 rw-
+7 rwx
+
+
+      ogp
+chmod 100 test.txt
+
+chmod u+w a.txt
+chmod u+x test.txt	-> By using alphabet
+chmod o+wx,u-x,g=r-x test.txt
+
+chmod -R 777 test.txt	recursive permission (it will set permission of all same under the dir)
+
+
+
+
+
+cat /etc/passwd/	-> will show all users
+
+useradd 	//It will add user when u are in root dir to swich in root ==> sudo su -
+useradd -m devops_unix	-> add a user with name devops unix
+passwd devops_unix	-> change the password
+
+groupadd devops_group	=> to add in group
+
+chgrp devops_group username_group_file.txt	=> it will work in root // to change the group
+chown devops_unix username_group_file.txt	=> 
+
+vi file name-> used to view and edit
+
+000-777	=> for dir
+000-666	=> for files
+
+umask test.txt -> view or to set the file mode creation mask, which determines the permissions bits for newly created files or directories.
+
+info umask -> gives information about recentely created file
+man umask -> user manual
+
+
+mesg : is used to msg to other users
+wall
+talk
+write
+mail
+news
+ping
+
+uptime : see all about the machine like no. of users and time and all.
+hostname : to see the hostname
+ifconfig : used to configure the kernel-resident network interfaces.
+nslookup sitename : will change in ip address (hostname to ip and ip to hostname)
+
+netstat => will show all the connection of tcp and udp
+
+
+Editors : ex, ed, sed, gEdit, emacs, nano, vi, vim, etc.
+The best way of using screen-oriented text editor is vi and an improved version of vi editor is called vim.
+
+
+
+***********vi file_name => to open or create file.********
+
+The editor vi has theree modes of operations.
+First operation = command mode.
+Second operation = Input mode.
+Third Operation = Exclusive mode.
+Command Mode is the default mode.
+For invoking input mode we can use "ESC + i"
+For performing the tasks like exit , saving , substitue -- press ":" -
+For saving . we will use "ESC + :wq!"
+With out saving. we will use "ESC + :wa!" 
+for appending something wee need to press " Esc + a".
+for moving the cursor left of right . you can use left arrow key or right arrow key of h or hackspace.
+for moving the cursor up === press "ESC + k"
+for moving the cursor down === press "ESC + j"
+for revert back any changes undo === press "ESC + u"
+for redu === press ctrl + r.
+CTRL + d move forword 1/2 screen.
+CTRL + f move forword one full scrren
+CTRL + u move backword 1/2 screen.
+CTRL + b move backword one full scrren	
+CTRL + e move screen up 1 line
+CTRL + y move screen down 1 line
+To do this, press Esc , type the line number, and then press Shift-g . If you press Esc and then Shift-g without specifying a line number
+positition cursor at begining of line -- ESC + 0
+position cursor at end of line == ESC + $
+
+Go at line n. 5 : "ESC+ :5
+use "ESC + x" to remove anything
+Esc + nx to delete n element
+Esc + dd to delete whole line
+ESC + D
+ESC + d0
+Esc + dw
+FOR deleting two line ESC + 2dd
+
+For search "ESC + /word" "ESC+ ?word"
+
+Replacemnt and substitue :
+
+:%s/FOR/FOR/g
+
+for copy : ESC + :8 co 10
+
+*****sed_commmands*******
+it is stream oriented editor.
+
+sed '3d' myfirst_regex_sed_file	=> delete 3rd line temporary.
+sed -i '3d' myfirst_regex_sed_file	=> it will delete 3rd line from the original file.
+sed '$d' myfirst_regex_sed_file 	=> delete last line
+sed '2,4d' myfirst_regex_sed_file	=> delete from line 2 to 4
+sed '1d;$d' myfirst_regex_sed_file	=> delete first and last line.
+sed '/^w/d' myfirst_regex_sed_file 	=> delete which will starts with w.
+sed '/s$/d' myfirst_regex_sed_file 	=> delete ending with s
+sed '/[sn]$/d' myfirst_regex_sed_file	=> delete ending with s and n both
+sed '/[A-Z]$/d' myfirst_regex_sed_file	=> it will delete a line which have all capital latters
+sed '/unix/d' myfirst_regex_sed_file		=> delete a line having unix word
+sed '/unix\|u/d' myfirst_regex_sed_file
+sed '1,/Akrisht/d' myfirst_regex_sed_file	=> delete startig from 1 to till find Akrisht
+
+
+Shell Script : Runnig commands in ordered way is call shell script.
+
+types : born sell c sell bash cell 
+
+# is used for commment
+extension => .sh
+
+Shebangline	#!/bin/sh	=> optional
+
+To run :=> ./filename.sh OR sh filename.sh
+
+ls -ltr &	=> run in background
+fg %1 		=> for foreground job
+
+sed 's/Peach/Grapes/g' fruit_prices.txt 	==> replace peach to grapes
+sed -n '/0\.[0-9][0-9]$/p' fruit_prices.txt	==> show only 0-.99
+
+
+**top***ps**
+**free***
+
+***awk command*****
+
+Fruit		Price
+Banana 	0.90	
+Peach 		0.56
+Kiwi 		1.30
+Pineapple	1.25
+Apple 		0.99
+Mango		2.20
+
+
+
+awk '{print ;}' fruit_prices.txt			=> will print whole table 
+awk '{print $1 ;}' fruit_prices.txt 			=> will print first colomn
+awk '{print $2 ;}' fruit_prices.txt 			=> will print second colomn
+
+
+awk '{print $1, $2, S3,"*";}' fruit_prices.txt
+Fruit Price  *
+Banana 0.90  *
+Peach 0.56  *
+Kiwi 1.30  *
+Pineapple 1.25  *
+Apple 0.99  *
+Mango 2.20  *
+
+
+
+
+**************hello.sh*****************
+#!/bin/bash
+
+# This is my first shell script
+
+echo "Hello World!"
+
+echo "Enter your name :"
+
+read name
+
+echo "your name is : " $name
+
+
+
+****************firstShellScript*******************************
+
+#!/bin/sh
+
+awk '/ *\$[1-9][0-9]*/ {print $0. ;}/*\$0\.[0-9][0-9] */{print ;}' fruit_prices1.txt
+
+
+
+************************************************************
+Shell Script Operations :
+
+echo My salary is $5000
+My salary is 000
+
+echo My salary is \$5000
+My salary is $5000
+
+echo Hello\; World
+Hello; World
+
+echo "This will print \
+as two lines"
+This will print as two lines
+
+akshrits@CGLX-LPT-159U:~$ var='cal'
+akshrits@CGLX-LPT-159U:~$ var=`cal`
+akshrits@CGLX-LPT-159U:~$ echo $var
+November 2022 Su Mo Tu We Th Fr Sa 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+
+akshrits@CGLX-LPT-159U:~$ DATE='date'
+akshrits@CGLX-LPT-159U:~$ echo $DATE
+date
+akshrits@CGLX-LPT-159U:~$ DATE=`date`
+akshrits@CGLX-LPT-159U:~$ echo $DATE
+Thursday 17 November 2022 10:49:49 AM IST
+
+akshrits@CGLX-LPT-159U:~$ echo "6*4" | bc; echo "6+4"| bc;echo "6-4" | bc;echo "6/4"|bc;echo "6%4" |bc
+24
+10
+2
+1
+2
+
+akshrits@CGLX-LPT-159U:~$ echo "6*4" | bc; echo "6/7" | bc;
+24
+0
+
+akshrits@CGLX-LPT-159U:~$ echo "5-2;last+6" | bc;
+3
+9
+
+akshrits@CGLX-LPT-159U:~$ x=`echo "15-4" | bc`; echo $x
+11
+
+akshrits@CGLX-LPT-159U:~$ echo "sqrt(10)" | bc;
+3
+
+akshrits@CGLX-LPT-159U:~$ echo "scale=3;sqrt(10)" | bc;
+3.162
+
+akshrits@CGLX-LPT-159U:~$ echo "obase=16;128" |bc;	#decimal to hexadecimal
+80
+
+akshrits@CGLX-LPT-159U:~$ echo 'ibase=16;obase=A;80' |bc;	#hexadecimal to decimal
+128
+
+akshrits@CGLX-LPT-159U:~$ echo 'obase=2;128' |bc;	#decimal to binary
+10000000
+
+akshrits@CGLX-LPT-159U:~$ echo 'ibase=2;obase=A;10000000' | bc;	#binary to decimal
+128
+
+akshrits@CGLX-LPT-159U:~$ echo "10^2" | bc;
+100
+
+akshrits@CGLX-LPT-159U:~$ expr length Linux	#length of linux
+5
+akshrits@CGLX-LPT-159U:~$ expr length Linux\ System
+12
+
+akshrits@CGLX-LPT-159U:~$ expr substr Linuxserver 5 6;	#give sub string of len 6 which starts with 5 character
+xserve
+
+akshrits@CGLX-LPT-159U:~$ expr index Linux nux;	#find and give the index of substr in str. if not found it will show 0
+3
+
+akshrits@CGLX-LPT-159U:~$ a=10; b=20;
+akshrits@CGLX-LPT-159U:~$ echo `expr $a+$b`
+10+20
+akshrits@CGLX-LPT-159U:~$ echo `expr $a+$b` |bc;
+30
+
+************************************first_if_else_script.txt**********************
+
+#! /bin/bash
+
+var1=10
+var2=20
+
+if [ $var1 -eq 10 ] ; then
+
+echo "command was successful.";
+
+else
+
+echo "An error was encountered."
+exit
+
+fi		#fundamental control statement that allows Shell to make decisions and execute statements conditionally.
+
+o/p => command was successful.
+
+
+
+***************************second_script***********************
+#! /bin/bash
+
+echo "Please enter the value of var"
+read var
+
+if [ $var -ne 10 ] ; then
+	echo "An error was encountered."
+	exit
+
+fi
+
+echo "command was successful."
+
+
+
+*************************modified_second_script********************
+#! /bin/bash
+
+echo "Please enter the value of var1"
+read var1
+
+if [ $var1 -ne 10 ] ; then
+	echo "An error was encountered."
+else
+	echo "Command was successful."
+fi
+
+echo "Please enter the value of var2"
+read var2
+
+if [ $var2 -gt 10 ] ; then
+	echo "value is greater than 10.";
+else 
+	echo "value is less than 10."
+fi
+
+echo "Please enter the value of var3"
+read var3
+
+if [ $var3 -lt 10 ] ; then
+        echo "value is less than 10.";
+else 
+        echo "value is greater than 10."
+fi
+
+
+
+
+****************case in shell script (fruit.sh)***********************
+#! /bin/bash 
+
+FRUIT=kiwi
+
+case "$FRUIT" in
+	apple) echo "Apple is very tasty" ;;
+	banana) echo "I like banana nut bread" ;;
+	kiwi) echo "New zeeland is famous for kiwi" ;;
+esac
+
+
+
+****************while_loop.sh***************************
+#! /bin/bash
+
+x=0
+
+while [ $x -lt 10 ]
+do
+	echo $x
+	x=`echo "$x +1" | bc`
+
+done
+
+o/p=> 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+**************************break_nested_loop.sh**********************
+#! /bin/bash
+
+for i in 1 2 3 4 5
+do 
+	mkdir -p /home/akshrits/shell_scripts/backup/docs/chapter0${i}
+	if [ $? -eq 0 ] ; then
+		for j in docs c h m pl sh
+		do 
+			cp $HOME/docs/ch0${i}/*.${i} /home/akshrits/shell_scripts/back/docs/chapter0${i}
+		if [ $? -ne 0 ] ; then break 2 ; fi
+		done
+	else
+		
+		echo "Could not make backup directory"
+	fi
+
+done	
+
+*******************command_line_name(taking input using for loop)*********************
+#! /bin/bash
+
+for arg in "$@"		#take input using for loop
+do
+	index=$(echo $arg | cut -f1 -d=)
+	val=$(echo $arg | cut -f2 -d=)
+	
+	case $index in
+		x) x=$val;;
+		y) y=$val;;
+		*)
+	esac
+done
+((result=x+y))
+echo "x+y=$result"
+
+akshrits@CGLX-LPT-159U:~/shell_scripts$ ./command_line_names x=45 y=30
+x+y=75
+
+
+****************Funtion in shell Script(function_example.sh)***************
+#! /bin/bash
+
+function F1()
+{
+	echo "I like bash programming"
+}
+
+F1
+
+akshrits@CGLX-LPT-159U:~/shell_scripts$ ./function_example 
+I like bash programming
+
+
+******************functional_parameter.sh*******************
+#! /bin/bash
+
+Rectangle_Area()
+{
+	area=$(($1 * $2))
+	echo "Area is : $area"
+}
+
+Rectangle_Area 10 20
+
+akshrits@CGLX-LPT-159U:~/shell_scripts$ ./functional_parameter.sh 
+Area is : 200
+
+
+***************function_return.sh****************************
+#! /bin/bash
+
+function greeting()
+{
+	str="Hello, $name"
+	echo $str
+}
+
+echo "Enter your name"
+read name
+
+val=$(greeting)
+
+echo "Return value of the function is $val"
+
+
+akshrits@CGLX-LPT-159U:~/shell_scripts$ ./function_return.sh
+Enter your name
+Akrisht
+Return value of the function is Hello, Akrisht
+
+
+
+*********************Reading from book.txt using inbuilt function(read_file.sh)****************
+
+#! /bin/bash
+
+file='book.txt'
+
+while read line ; do
+
+echo $line
+done < $file
+
+
+*********************A script which will add 2-3 more line in file(append_file.sh)***********************8
+
+#! /bin/bash
+
+echo "Befor appending the file"
+
+cat book.txt
+
+cat book.txt > book_append.txt
+
+echo "9. Aws clound computing" >> book_append.txt
+
+echo "10. Azure Devops using FAAS" >> book_append.txt
+
+echo "After appending the file"
+
+cat book_append.txt 
+
+*****************************check of the file that will create after appending is exits or not (file_exist.sh)****************
+#! /bin/bash
+
+filename=$1
+
+if [ -f "$filename" ] ; then
+	echo "File exits"
+else
+	echo "File does not exits"
+
+fi
+
+akshrits@CGLX-LPT-159U:~/shell_scripts$ ./file_exit.sh  book_append.txt
+File exits
+
+
+************wait command(wait_exmaple.sh)**************************
+#! /bin/bash
+
+echo "wait command" &
+process_id=$!
+wait $peocess_id
+echo "Exited with status $?"
+
+akshrits@CGLX-LPT-159U:~/shell_scripts$ ./wait_example.sh
+wait command
+Exited with status 0
+
+
+
+
+====> ps -aef ///==> to see runnig process
