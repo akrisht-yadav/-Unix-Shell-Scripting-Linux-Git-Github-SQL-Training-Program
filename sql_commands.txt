@@ -1,0 +1,540 @@
+To enter in maiadb server: mysql -u root -p (Go by using root loaction)
+
+show databases;	//To show all database
+use database_name;	//To use the database
+
+CREATE DATABASE temp;
+
+MariaDB [temp]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| temp               |
++--------------------+
+
+USE temp;
+
+CREATE TABLE student (
+    id INT PRIMARY KEY,
+    name VARCHAR(255)
+    );
+
+INSERT INTO student VALUES(1, 'ANKIT');
+INSERT INTO student VALUES(2, 'LAKSHAY');
+
+MariaDB [temp]> SELECT * FROM student;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | ANKIT   |
+|  2 | LAKSHAY |
++----+---------+
+
+DROP DATABASE IF EXISTS temp;
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+
+
+******************************************************************************************
+
+CREATE DATABASE ORG;
+SHOW DATABASES;
+USE ORG;
+
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker (WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+MariaDB [ORG]> SELECT * FROM Worker;
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+
+CREATE TABLE Bonus (
+	WORKER_REF_ID INT,
+	BONUS_AMOUNT INT(10),
+	BONUS_DATE DATETIME,
+	FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE
+);
+
+INSERT INTO Bonus (WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES
+		(001, 5000, '16-02-20'),
+		(002, 3000, '16-06-11'),
+		(003, 4000, '16-02-20'),
+		(001, 4500, '16-02-20'),
+		(002, 3500, '16-06-11');
+		
+		
+MariaDB [ORG]> SELECT * FROM Bonus;
++---------------+--------------+---------------------+
+| WORKER_REF_ID | BONUS_AMOUNT | BONUS_DATE          |
++---------------+--------------+---------------------+
+|             1 |         5000 | 2016-02-20 00:00:00 |
+|             2 |         3000 | 2016-06-11 00:00:00 |
+|             3 |         4000 | 2016-02-20 00:00:00 |
+|             1 |         4500 | 2016-02-20 00:00:00 |
+|             2 |         3500 | 2016-06-11 00:00:00 |
++---------------+--------------+---------------------+
+
+CREATE TABLE Title (
+	WORKER_REF_ID INT,
+	WORKER_TITLE CHAR(25),
+	AFFECTED_FROM DATETIME,
+	FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID) ON DELETE CASCADE
+);
+
+INSERT INTO Title (WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM) VALUES
+ (001, 'Manager', '2016-02-20 00:00:00'),
+ (002, 'Executive', '2016-06-11 00:00:00'),
+ (008, 'Executive', '2016-06-11 00:00:00'),
+ (005, 'Manager', '2016-06-11 00:00:00'),
+ (004, 'Asst. Manager', '2016-06-11 00:00:00'),
+ (007, 'Executive', '2016-06-11 00:00:00'),
+ (006, 'Lead', '2016-06-11 00:00:00'),
+ (003, 'Lead', '2016-06-11 00:00:00');
+
+MariaDB [ORG]> SELECT * FROM Title;
++---------------+---------------+---------------------+
+| WORKER_REF_ID | WORKER_TITLE  | AFFECTED_FROM       |
++---------------+---------------+---------------------+
+|             1 | Manager       | 2016-02-20 00:00:00 |
+|             2 | Executive     | 2016-06-11 00:00:00 |
+|             8 | Executive     | 2016-06-11 00:00:00 |
+|             5 | Manager       | 2016-06-11 00:00:00 |
+|             4 | Asst. Manager | 2016-06-11 00:00:00 |
+|             7 | Executive     | 2016-06-11 00:00:00 |
+|             6 | Lead          | 2016-06-11 00:00:00 |
+|             3 | Lead          | 2016-06-11 00:00:00 |
++---------------+---------------+---------------------+
+
+
+MariaDB [ORG]> SHOW TABLES;
++---------------+
+| Tables_in_ORG |
++---------------+
+| Bonus         |
+| Title         |
+| Worker        |
++---------------+
+
+MariaDB [ORG]> SELECT 55+12;	//use of select without from
++-------+
+| 55+12 |
++-------+
+|    67 |
++-------+
+
+MariaDB [ORG]> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2022-11-28 11:15:10 |
++---------------------+
+
+MariaDB [ORG]> SELECT ucase( 'AKrisHt');
++-------------------+
+| ucase( 'AKrisHt') |
++-------------------+
+| AKRISHT           |
++-------------------+
+
+MariaDB [ORG]> SELECT * FROM Worker WHERE SALARY > 80000;
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+
+
+MariaDB [ORG]> SELECT * FROM Worker WHERE DEPARTMENT = 'HR';
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
++-----------+------------+-----------+--------+---------------------+------------+
+
+
+MariaDB [ORG]> SELECT * FROM Worker WHERE SALARY BETWEEN 80000 AND 300000;
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+
+MariaDB [ORG]> SELECT * FROM Worker WHERE DEPARTMENT='HR' OR DEPARTMENT = 'Admin';
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+
+
+
+USE IN TO REDUSE OR ||=> BETTER WAY :
+
+MariaDB [ORG]> SELECT * FROM Worker WHERE DEPARTMENT IN ('HR','Admin');
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+
+MariaDB [ORG]> SELECT * FROM Worker WHERE DEPARTMENT NOT IN ('HR','Admin');
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |
++-----------+------------+-----------+--------+---------------------+------------+
+
+
+
+
+PATTERN SEARCHING / WHILDCARD :
+
+MariaDB [ORG]> SELECT * FROM Worker WHERE FIRST_NAME LIKE '_i%_';
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
++-----------+------------+-----------+--------+---------------------+------------+
+
+ariaDB [ORG]> SELECT * FROM Worker WHERE FIRST_NAME LIKE '%ika';
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+
+
+
+ORDER BY:
+
+MariaDB [ORG]> SELECT * FROM Worker ORDER BY SALARY;
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+
+MariaDB [ORG]> SELECT * FROM Worker ORDER BY SALARY DESC;
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |
++-----------+------------+-----------+--------+---------------------+------------+
+
+
+DISTINT :
+
+MariaDB [ORG]> SELECT DISTINCT DEPARTMENT FROM Worker;
++------------+
+| DEPARTMENT |
++------------+
+| HR         |
+| Admin      |
+| Account    |
++------------+
+
+
+
+DATA GROUPING : group by
+
+QUESTION : Find n. of employes working in diff department??
+######WITHOUT ANY AGGREFATION FUNCTION GROUP BY ACTS AS A DISTINCT.####
+
+MariaDB [ORG]> SELECT DEPARTMENT,COUNT(*) FROM Worker GROUP BY DEPARTMENT;
+	OR
+MariaDB [ORG]> SELECT DEPARTMENT,COUNT(DEPARTMENT) FROM Worker GROUP BY DEPARTMENT;
++------------+----------+
+| DEPARTMENT | COUNT(*) |
++------------+----------+
+| Account    |        2 |
+| Admin      |        4 |
+| HR         |        2 |
++------------+----------+
+
+QUESTION : Find avg. salary per department??
+MariaDB [ORG]> SELECT department, avg(salary) FROM Worker GROUP BY department;
++------------+-------------+
+| department | avg(salary) |
++------------+-------------+
+| Account    | 137500.0000 |
+| Admin      | 292500.0000 |
+| HR         | 200000.0000 |
++------------+-------------+
+
+QUESTION : Find MIN salary per department??
+MariaDB [ORG]> SELECT department, MIN(salary) FROM Worker GROUP BY department;
++------------+-------------+
+| department | MIN(salary) |
++------------+-------------+
+| Account    |       75000 |
+| Admin      |       80000 |
+| HR         |      100000 |
++------------+-------------+
+
+
+
+
+
+HAVING :
+####GROUP BY k ander filtering k liye use HAVING
+
+QUESTION : DEPARTMENT , COUNT HAVING MORE THAN 2 WOKRER??????
+MariaDB [ORG]> SELECT DEPARTMENT , COUNT(DEPARTMENT) FROM Worker GROUP BY DEPARTMENT HAVING COUNT(DEPARTMENT) > 2;
++------------+-------------------+
+| DEPARTMENT | COUNT(DEPARTMENT) |
++------------+-------------------+
+| Admin      |                 4 |
++------------+-------------------+
+
+
+
+MariaDB [ORG]> DESC Worker;
++--------------+----------+------+-----+---------+----------------+
+| Field        | Type     | Null | Key | Default | Extra          |
++--------------+----------+------+-----+---------+----------------+
+| WORKER_ID    | int(11)  | NO   | PRI | NULL    | auto_increment |
+| FIRST_NAME   | char(25) | YES  |     | NULL    |                |
+| LAST_NAME    | char(25) | YES  |     | NULL    |                |
+| SALARY       | int(15)  | YES  |     | NULL    |                |
+| JOINING_DATE | datetime | YES  |     | NULL    |                |
+| DEPARTMENT   | char(25) | YES  |     | NULL    |                |
++--------------+----------+------+-----+---------+----------------+
+
+
+
+CONSTRAINTS:
+	1.PRIMARY KEY
+	2.FOREIGN KEY
+	3.UNIQUE
+	4.CHECK
+	5.DEFAULT
+
+ALTER OPERATIONS:
+	1. ADD => ADD NEW COLUMN
+		ALTER TABLE table_name ADD new_col_name datatype ADD new_col_name datatype;
+	2. MODIFY => CHANGE DATATYPE OF AN ATTRIBUTE
+	3. CHANGE COLUMN => RENAME COLUMN NAME
+	4. DROP COLUMN => DROP A COLUMN COMPLETLY
+	5. RENAME => (USE - RENAME TO) RENAME TABLE NAME ITSELF
+	
+	
+DATA MANIPULATION LANGUAGE :
+	1.INSERT
+	2.UPDATE 
+		UPDATE table_name SET col1=1,col2='ABC' WHERE id=1;
+		
+		UPDATE MULTIPLE ROWS
+			UPDATE student SET standard=standard+1;
+		
+		*****SET SQL_SAFE_UPDATES =0;**** TO REMOVE WHOLE DATA
+		
+	3.DELETE 
+		DELETE FROM table_name WHERE id = 1;
+		
+		DELETE FROM table_name; // ALL ROWS WILL BE DELETED;
+		
+		***ON DELETE CASECADE : IF YOU WANT TO DELETE ANY CHILD THEN PARENT WILL DELETE (DURING THE FORAGIN KEY)
+		***ON DELETE NULL : PUT NULL;
+		
+	4. REPLACE
+		Data already present, Replace
+		Data not present, Insert
+		
+
+
+JOINING TABLES: 
+	1.INNER JOIN : Returns a resultant table that has matching values from both the tables or all the tables.
+		SELECT column-list FROM table1 INNERJOIN table2 ON condition;
+
+MariaDB [ORG]> SELECT * FROM Worker INNER JOIN Title ON Worker.WORKER_ID = Title.WORKER_REF_ID;
++-----------+------------+-----------+--------+---------------------+------------+---------------+---------------+---------------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT | WORKER_REF_ID | WORKER_TITLE  | AFFECTED_FROM       |
++-----------+------------+-----------+--------+---------------------+------------+---------------+---------------+---------------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |             1 | Manager       | 2016-02-20 00:00:00 |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |             2 | Executive     | 2016-06-11 00:00:00 |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |             8 | Executive     | 2016-06-11 00:00:00 |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |             5 | Manager       | 2016-06-11 00:00:00 |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |             4 | Asst. Manager | 2016-06-11 00:00:00 |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |             7 | Executive     | 2016-06-11 00:00:00 |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |             6 | Lead          | 2016-06-11 00:00:00 |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |             3 | Lead          | 2016-06-11 00:00:00 |
++-----------+------------+-----------+--------+---------------------+------------+---------------+---------------+---------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [ORG]> SELECT Worker.*,Title.WORKER_TITLE FROM Worker INNER JOIN Title ON Worker.WORKER_ID = Title.WORKER_REF_ID;
++-----------+------------+-----------+--------+---------------------+------------+---------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT | WORKER_TITLE  |
++-----------+------------+-----------+--------+---------------------+------------+---------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         | Manager       |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      | Executive     |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      | Executive     |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      | Manager       |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      | Asst. Manager |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    | Executive     |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    | Lead          |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         | Lead          |
++-----------+------------+-----------+--------+---------------------+------------+---------------+
+8 rows in set (0.001 sec)
+
+MariaDB [ORG]> SELECT Worker.FIRST_NAME,Worker.WORKER_ID,Title.WORKER_TITLE FROM Worker INNER JOIN Title ON Worker.WORKER_ID = Title.WORKER_REF_ID;
++------------+-----------+---------------+
+| FIRST_NAME | WORKER_ID | WORKER_TITLE  |
++------------+-----------+---------------+
+| Monika     |         1 | Manager       |
+| Niharika   |         2 | Executive     |
+| Geetika    |         8 | Executive     |
+| Vivek      |         5 | Manager       |
+| Amitabh    |         4 | Asst. Manager |
+| Satish     |         7 | Executive     |
+| Vipul      |         6 | Lead          |
+| Vishal     |         3 | Lead          |
++------------+-----------+---------------+
+8 rows in set (0.001 sec)
+
+MariaDB [ORG]> SELECT Worker.FIRST_NAME,Worker.WORKER_ID,Title.WORKER_TITLE FROM Worker INNER JOIN Title ON Worker.WORKER_ID = Title.WORKER_REF_ID WHERE Worker.DEPARTMENT='Admin' AND Title.WORKER_TITLE='Manager';
++------------+-----------+--------------+
+| FIRST_NAME | WORKER_ID | WORKER_TITLE |
++------------+-----------+--------------+
+| Vivek      |         5 | Manager      |
++------------+-----------+--------------+
+
+
+	2.OUTER JOIN
+		1. LEFT JOIN :
+			This returns a resulting table that all the data from left table and the matched data from the right table.
+			SELECT column-list FROM table1 LEFT JOIN table2 ON condition; 
+
+
+MariaDB [ORG]> SELECT * FROM Worker LEFT JOIN Title ON Worker.WORKER_ID = Title.WORKER_REF_ID;
++-----------+------------+-----------+--------+---------------------+------------+---------------+---------------+---------------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT | WORKER_REF_ID | WORKER_TITLE  | AFFECTED_FROM       |
++-----------+------------+-----------+--------+---------------------+------------+---------------+---------------+---------------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |             1 | Manager       | 2016-02-20 00:00:00 |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |             2 | Executive     | 2016-06-11 00:00:00 |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |             3 | Lead          | 2016-06-11 00:00:00 |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |             4 | Asst. Manager | 2016-06-11 00:00:00 |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |             5 | Manager       | 2016-06-11 00:00:00 |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |             6 | Lead          | 2016-06-11 00:00:00 |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |             7 | Executive     | 2016-06-11 00:00:00 |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |             8 | Executive     | 2016-06-11 00:00:00 |
++-----------+------------+-----------+--------+---------------------+------------+---------------+---------------+---------------------+
+8 rows in set (0.001 sec)
+
+
+MariaDB [ORG]> SELECT * FROM Worker as w LEFT JOIN Bonus as b ON w.WORKER_ID=b.WORKER_REF_ID;
++-----------+------------+-----------+--------+---------------------+------------+---------------+--------------+---------------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT | WORKER_REF_ID | BONUS_AMOUNT | BONUS_DATE          |
++-----------+------------+-----------+--------+---------------------+------------+---------------+--------------+---------------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |             1 |         5000 | 2016-02-20 00:00:00 |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |             2 |         3000 | 2016-06-11 00:00:00 |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |             3 |         4000 | 2016-02-20 00:00:00 |
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |             1 |         4500 | 2016-02-20 00:00:00 |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |             2 |         3500 | 2016-06-11 00:00:00 |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |          NULL |         NULL | NULL                |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |          NULL |         NULL | NULL                |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |          NULL |         NULL | NULL                |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |          NULL |         NULL | NULL                |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |          NULL |         NULL | NULL                |
++-----------+------------+-----------+--------+---------------------+------------+---------------+--------------+---------------------+
+
+		 2.RIGHT JOIN:
+		 	This returns a resulting table that all data from the right table and the matched data from the left table;
+		 	
+MariaDB [ORG]> SELECT * FROM Worker as w RIGHT JOIN Bonus as b ON w.WORKER_ID=b.WORKER_REF_ID;
++-----------+------------+-----------+--------+---------------------+------------+---------------+--------------+---------------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT | WORKER_REF_ID | BONUS_AMOUNT | BONUS_DATE          |
++-----------+------------+-----------+--------+---------------------+------------+---------------+--------------+---------------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |             1 |         5000 | 2016-02-20 00:00:00 |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |             2 |         3000 | 2016-06-11 00:00:00 |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |             3 |         4000 | 2016-02-20 00:00:00 |
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |             1 |         4500 | 2016-02-20 00:00:00 |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |             2 |         3500 | 2016-06-11 00:00:00 |
++-----------+------------+-----------+--------+---------------------+------------+---------------+--------------+---------------------+
+5 rows in set (0.001 sec)
+
+
+
+SET OPERATIONS :
+
+
+
+
+
+
+
+
