@@ -834,3 +834,7 @@ Exited with status 0
 
 
 ====> ps -aef ///==> to see runnig process
+
+
+
+*
