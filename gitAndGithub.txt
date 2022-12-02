@@ -1,0 +1,59 @@
+git config --global user.name AKRISHT	//To set the name
+git config --global user.name	//To see the name
+git config --global user.email akrisht.yadav@cognologix.com	//To set the emial
+git config --global user.email	//To see the mail
+
+
+git init	//To initialize a repo
+
+git status	//WIll display status of file like untracted file ... and all
+
+git add -A	//To add all files
+git add .	//To add all files in staging area
+git add file_name	//To add specific file in staging area
+
+git commit //To commit the files (it will open a vim editor where you can write the commint comments)
+git commit -m "Comments"	//Shorthand of above
+
+git cheackout file_name	// will change the current file to last commit file
+git cheackout -f	// will change the all file to last commit file
+
+git log 	//Will dispaly all commits
+git log -p -2	//will display last 2 commits
+
+git reset commit_id // to remove all commits after this commit
+
+git diff	// compare my working area to the staging area and will dispaly results
+gitt diff --staged	//compare staging area to last commit
+
+git commit -a -m	// to add in staging area and also commit simultaneously (Bad Practice) 
+
+git rm --cached file_name	// will remove form staging area only
+git rm file_name	//To delete from everywhere
+
+git status -s	// to see status in breaf
+
+
+To ignore any file make a file with the name .gitignore and put all the files in it which you want to ignore.
+And if you want to ignore any folder than use folder_name/
+And if you want to ingore any file the use /file_name
+Anf if you want to ignore all file with specific extaneison the use *.extension
+
+git branch branch_name	//To make a branch
+git breach	//To cheack working branch
+
+git cheackout branch_name	//To switch the branch
+
+
+Do it when you are in master branch:
+git merge branch_name	//To merge the new brach to master branch 
+
+git remote add origin https:......................	//To add repo on remote location
+git push -u origin master // to push the repository
+git push	//whi push karega jha hm pichali baar push kiye the
+git push origin master
+
+git remote // to check for origin
+git remote -v // url to fetch and push
+
+git clone url_of_repo // to clone a repository
